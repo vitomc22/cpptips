@@ -4,6 +4,8 @@
         "functional": "cpp",
         "istream": "cpp",
         "limits": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp"
     }
 }
