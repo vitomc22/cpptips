@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
     try 
     {
         //isso funfa
-        std::cout << "Fatorial de 3 é "
+        std::cout << "Fatorial de 3 é '"
                   << factorial(3) << std::endl;
         //isso gerará excessão
         std::cout << "Fatorial de -1 é "
