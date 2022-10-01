@@ -16,17 +16,16 @@ int main() {
       return 1;
     }
 
-    MYSQL_RES * res_set;
-    MYSQL_ROW row;
+    MYSQL_RES *res_set; //typedef struct MYSQL_RES -> coluna, serve estruturar os resultados da query 
+    MYSQL_ROW row;   //return data as array of strings
 
-    mysql_query(connect, "SELECT * FROM   crudcpp");
-    unsigned int i = 0;
-    res_set = mysql_store_result(connect);
-    unsigned int numrows = mysql_num_rows(res_set);
+    mysql_query(connect, "SELECT * FROM   crudcpp"); //cria a query
 
-    while ( (row = mysql_fetch_row(res_set)) != NULL)    {  
-      std::cout <<row[0] <<" | " << row[1] <<" | " << row[2] <<" | " << '\n';
-      
+    res_set = mysql_store_result(connect); //Guarda o reslutado da query
+
+    while ((row = mysql_fetch_row(res_set)) != NULL) {
+      std::cout << row[0] << " | " << row[1] << " | " << row[2] << " | "
+                << '\n';
     }
 
     mysql_close(connect);
@@ -35,6 +34,4 @@ int main() {
   } catch (...) {
     std::cout << "Falha ao conectar!" << '\n';
   }
-
-  
 }
