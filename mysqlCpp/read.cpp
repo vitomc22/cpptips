@@ -1,7 +1,5 @@
-#include <exception>
 #include <iostream>
 #include <mysql/mysql.h>
-#include <stdexcept>
 #include <stdlib.h>
 
 int main() {
