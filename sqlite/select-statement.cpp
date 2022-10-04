@@ -9,26 +9,18 @@ int main(int argc, char const *argv[]) {
 
     sqlite3 *db;
     sqlite3_stmt *stmt;
-    std::vector<std::vector<std::string>> result;
 
     // vetor de duas dimensões, vetor interno e string
 
     if (sqlite3_open("banco_de_dados.db", &db) != SQLITE_OK) {
       std::cout << "Failed to open db\n";
     } else {
-      sqlite3_prepare(db, "SELECT * from dados;", -1, &stmt,
-                      NULL); // preparing the statement
-      sqlite3_step(stmt);    // executing the statement
+      auto rc = sqlite3_prepare_v2(db, "SELECT * from dados;", -1, &stmt, NULL);
 
-      for (int i = 0; i < 2; i++) {
-        result.push_back(std::vector<std::string>());
-      }
-
-      while (sqlite3_column_text(stmt, 0)) {
-        for (int i = 0; i < 2; i++)
-          result[i].push_back(
-              std::string((char *)sqlite3_column_text(stmt, i)));
-        sqlite3_step(stmt);
+      rc = sqlite3_step(stmt);
+      if (rc == SQLITE_ROW) {
+        std::cout << sqlite3_column_text(stmt, 0) << '\n';
+        std::cout << sqlite3_column_text(stmt, 1)<< '\n';
       }
 
       sqlite3_close(db);
@@ -36,5 +28,5 @@ int main(int argc, char const *argv[]) {
   }
   return 0;
 }
-//nao funfa, ta dando segmentation fault
-// g++ select-statement.cpp -l sqlite3 -o select-statemente.o
+// nao funfa, traz uma linha somente, parece que a implementação padrão é por callback mesmo
+//  g++ select-statement.cpp -l sqlite3 -o select-statemente.o
