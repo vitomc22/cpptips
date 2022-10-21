@@ -13,4 +13,3 @@ int main(int argc, char const *argv[]){
     std::cout << "O valor de X é : " << x << '\n';
     return 0;
 }
-
